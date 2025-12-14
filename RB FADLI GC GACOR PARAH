@@ -10,19 +10,19 @@ pcall(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "POTATO GRAPHICS",
         Text = "FADLI MOD",
-        Duration = 8
+        Duration = 10
     })
 end)
 
 if setfpscap then
-    setfpscap(46)
+    setfpscap(47)
 end
 
 settings().Rendering.QualityLevel = 0
 settings().Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level04
 
 Lighting.GlobalShadows = false
-Lighting.FogEnd = 9e4
+Lighting.FogEnd = 9e9
 Lighting.ShadowSoftness = 0
 
 for _,v in pairs(Lighting:GetChildren()) do
@@ -42,7 +42,7 @@ if Terrain then
     Terrain.WaterWaveSize = 0
     Terrain.WaterWaveSpeed = 0
     Terrain.WaterReflectance = 0
-    Terrain.WaterTransparency = 0
+    Terrain.WaterTransparency = 1
 end
 
 MaterialService.Use2022Materials = false
@@ -58,9 +58,7 @@ for _,v in pairs(game:GetDescendants()) do
         or v:IsA("Fire")
         or v:IsA("Sparkles")
         or v:IsA("Explosion")
-        or v:IsA("Clothing")
-        or v:IsA("SurfaceAppearance")
-        or v:IsA("BaseWrap")
+        or v:IsA("Clothing")            
         or v:IsA("Decal")
         or v:IsA("Texture")
         or v:IsA("Sky")
@@ -75,9 +73,6 @@ for _,v in pairs(game:GetDescendants()) do
 or v:IsA("Pants")
 or v:IsA("ShirtGraphic")
 or v:IsA("Hat")
-or v:IsA("WrapLayer")
-or v:IsA("SurfaceAppearance")
-or v:IsA("HumanoidDescription") 
 or v:IsA("Accessory") 
   or v:IsA("MaterialVariant") then      
             v:Destroy()
@@ -100,7 +95,7 @@ or v:IsA("Accessory")
             v.LevelOfDetail = 0       
         end
              if v:IsA("FaceInstance") then
-            v.Transparency = 0
+            v.Transparency = 1
                 v.Shiny = 0
         end
         if v:IsA("MaterialVariant") then
@@ -118,9 +113,7 @@ game.DescendantAdded:Connect(function(v)
         or v:IsA("Fire")
         or v:IsA("Sparkles")
         or v:IsA("Explosion")
-        or v:IsA("Clothing")
-        or v:IsA("SurfaceAppearance")
-        or v:IsA("BaseWrap")
+        or v:IsA("Clothing")            
         or v:IsA("Decal")
         or v:IsA("Texture")
         or v:IsA("Sky")
@@ -136,11 +129,9 @@ or v:IsA("Pants")
 or v:IsA("ShirtGraphic")
 or v:IsA("Accessory")
 or v:IsA("Hat")
-or v:IsA("WrapLayer")
-or v:IsA("SurfaceAppearance")
-or v:IsA("HumanoidDescription") 
 or v:IsA("Accessory") 
-  or v:IsA("MaterialVariant") then      
+  or v:IsA("MaterialVariant") 
+  or v:IsA("HopperBin") then      
             v:Destroy()
         end
     end)
