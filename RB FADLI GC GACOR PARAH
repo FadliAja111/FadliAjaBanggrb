@@ -10,7 +10,7 @@ pcall(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "POTATO GRAPHICS",
         Text = "FADLI MOD",
-        Duration = 10
+        Duration = 12
     })
 end)
 
