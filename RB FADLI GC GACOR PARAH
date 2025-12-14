@@ -1,0 +1,187 @@
+-- =====================================
+-- FADLI MOD | FULL POTATO + FPS GACOR
+-- =====================================
+
+repeat task.wait() until game:IsLoaded()
+
+-- =====================
+-- SETTINGS SUPER POTATO
+-- =====================
+_G.Settings = {
+    Players = {
+        ["Ignore Me"] = true,
+        ["Ignore Others"] = true,
+        ["Ignore Tools"] = true
+    },
+
+    Meshes = {
+        NoMesh = true,
+        NoTexture = true,
+        Destroy = true
+    },
+
+    Images = {
+        Invisible = true,
+        Destroy = true
+    },
+
+    ["No Particles"] = true,
+    ["No Camera Effects"] = true,
+    ["No Explosions"] = true,
+    ["No Clothes"] = true,
+    ["Low Water Graphics"] = true,
+    ["No Shadows"] = true,
+    ["Low Rendering"] = true,
+    ["Low Quality Parts"] = true
+}
+
+-- =====================
+-- SERVICES
+-- =====================
+local Players = game:GetService("Players")
+local Lighting = game:GetService("Lighting")
+local StarterGui = game:GetService("StarterGui")
+local player = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+
+-- =====================
+-- NOTIF
+-- =====================
+pcall(function()
+    StarterGui:SetCore("SendNotification", {
+        Title = "FADLI MOD",
+        Text = "Super Potato Mode Activated",
+        Duration = 3
+    })
+end)
+
+-- =====================
+-- FPS BOOST
+-- =====================
+pcall(function()
+    settings().Rendering.QualityLevel = 0
+    settings().Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level04
+end)
+
+if setfpscap then
+    setfpscap(999)
+end
+
+-- =====================
+-- LIGHTING & WATER
+-- =====================
+pcall(function()
+    Lighting.GlobalShadows = false
+    Lighting.ShadowSoftness = 0
+    Lighting.FogEnd = 9e9
+
+    local terrain = workspace:FindFirstChildOfClass("Terrain")
+    if terrain then
+        terrain.WaterWaveSize = 0
+        terrain.WaterWaveSpeed = 0
+        terrain.WaterReflectance = 0
+        terrain.WaterTransparency = 0
+        if sethiddenproperty then
+            sethiddenproperty(terrain, "Decoration", false)
+        end
+    end
+end)
+
+-- =====================
+-- POTATO TEXTURE (ALL OBJECTS)
+-- =====================
+local function Potato(v)
+    if v:IsA("Texture") or v:IsA("Decal") then
+        v.Texture = ""
+        v.Transparency = 1
+
+    elseif v:IsA("SurfaceAppearance") then
+        v.ColorMap = ""
+        v.NormalMap = ""
+        v.RoughnessMap = ""
+        v.MetalnessMap = ""
+
+    elseif v:IsA("MeshPart") then
+        v.TextureID = ""
+        v.Material = Enum.Material.Plastic
+        v.Reflectance = 0
+        v.RenderFidelity = Enum.RenderFidelity.Performance
+
+    elseif v:IsA("SpecialMesh") then
+        v.TextureId = ""
+    end
+end
+
+-- =====================
+-- EFFECT KILLER
+-- =====================
+local function KillEffect(v)
+    if v:IsA("ParticleEmitter")
+    or v:IsA("Trail")
+    or v:IsA("Smoke")
+    or v:IsA("Fire")
+    or v:IsA("Sparkles")
+    or v:IsA("PostEffect")
+    or v:IsA("SunRaysEffect")
+    or v:IsA("Atmosphere")
+    or v:IsA("Sky")
+    or v:IsA("Clouds")
+    or v:IsA("BloomEffect")
+    or v:IsA("ColorCorrectionEffect")
+    or v:IsA("DepthOfFieldEffect")
+    or v:IsA("Shirt")
+    or v:IsA("Pants")
+    or v:IsA("ShirtGraphic")
+    or v:IsA("Hat")
+    or v:IsA("Accessory")
+    or v:IsA("Tool")
+    or v:IsA("HopperBin") then
+        pcall(function()
+            v.Enabled = false
+            v:Destroy()
+        end)
+    end
+end
+
+-- =====================
+-- APPLY POTATO
+-- =====================
+local function Apply()
+    for _,v in ipairs(game:GetDescendants()) do
+        Potato(v)
+        KillEffect(v)
+    end
+end
+
+Apply()
+
+-- =====================
+-- AUTO NEW OBJECT
+-- =====================
+game.DescendantAdded:Connect(function(v)
+    task.wait()
+    Potato(v)
+    KillEffect(v)
+end)
+
+-- =====================
+-- AUTO RESPAWN
+-- =====================
+player.CharacterAdded:Connect(function()
+    task.wait(1)
+    Apply()
+end)
+
+-- =====================
+-- DONE
+-- =====================
+pcall(function()
+    StarterGui:SetCore("SendNotification", {
+        Title = "FADLI MOD",
+        Text = "Super Potato Loaded | FPS Gacor",
+        Duration = 4
+    })
+end)
+
+warn("FADLI MOD | SUPER POTATO MODE ACTIVE")
+
